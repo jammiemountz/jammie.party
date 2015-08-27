@@ -1,23 +1,42 @@
-// var hypem = require('hypem-resolver');
-console.log('hey')
+var app = {
 
-// requirejs("hypem-resolver", function() {
+  songData: {},
 
-//   $( document ).ready(function() {
-//     var mySongs = {}
+  init: function() {
+    this.fetchSongs();
+  },
 
-//     var settings = {
-//       "async": true,
-//       "crossDomain": true,
-//       "url": "http://hypem.com/playlist/loved/jammiemountz/json/1/data.js",
-//       "method": "GET",
-//       "headers": {}
-//     }
+  parseSongData: function(songs) {
+    console.log('parsing data')
+    // for (var key in songs) {
+    //   var songInfo = songs[key];
+    //   console.log(songInfo.mediaid)
+    // }
+  },
 
-//     $.ajax(settings).done(function (response) {
-//       console.log(response);
-//     });
-//   })
+  fetchSongs: function(){
+    var that = this;
+    console.log('fetching songs')
+    $.ajax({
+      url: 'http://127.0.0.1:4000/songs',
+      type: 'GET',
+      data: 'json',
+      success: function (urls) {
+        console.log('urls recieved')
+        console.log(urls)
+      },
+      error: function(err) {
+        console.log("ERROR'd")
+        console.log(err)
+      }
+    });
+  }
 
-// })
+}
+
+$(document).ready(function() {
+  
+  app.init()
+
+})
 
