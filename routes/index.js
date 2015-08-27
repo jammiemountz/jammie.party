@@ -3,7 +3,10 @@ var router = express.Router();
 var hypemResolver = require('hypem-resolver')
 var reqwest = require('reqwest');
 var async = require('async')
+var songResolvers = require('../public/javascripts/songResolvers.js')
 var Promise = require("bluebird");
+
+var songResolverPromises = Promise.promisifyAll(songResolvers)
 
 var mediaIds = [];
 var urls = [];
