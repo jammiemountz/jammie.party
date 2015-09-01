@@ -3,10 +3,10 @@ module.exports = {
 
   // get my songs from HypeM
   getHypemFavoriteSongs: function(cb) {
-    console.log('in fav songs function')
-    return $.ajax({
-      url: 'http://hypem.com/playlist/loved/jammiemountz/json/1/data.js',
+    $.ajax({
+      url: 'http://127.0.0.1:4000/songs',
       type: 'GET',
+      data: 'json',
       success: function (urls) {
         console.log('SUCCESS: urls recieved')
         cb(urls);
