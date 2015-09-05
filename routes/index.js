@@ -34,7 +34,7 @@ router.get('/songs', function(req, res, next) {
       songData = urls;
 
       async.forEachOf(songData, function(value, key){
-
+        console.log(key);
       }, function(err){
         console.log(err)
       })
@@ -54,5 +54,19 @@ router.get('/songs', function(req, res, next) {
 
 
 });
+
+router.post('/songs', function(req, res, next){
+
+  hypemResolver.getById(req.body.mediaId, function(err, url){
+    console.log('1', url)
+    var streamResolver = songResolvers.createStreamResolverUrl(url)
+    console.log('2', streamResolver)
+    songResolvers.getStreamUri(streamResolver, function(uri){
+      console.log('3', uri)
+      res.send(uri)
+    })
+  })
+
+})
 
 module.exports = router;
