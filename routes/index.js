@@ -61,10 +61,24 @@ router.post('/songs', function(req, res, next){
     console.log('1', url)
     var streamResolver = songResolvers.createStreamResolverUrl(url)
     console.log('2', streamResolver)
-    songResolvers.getStreamUri(streamResolver, function(uri){
-      console.log('3', uri)
-      res.send(uri)
+    reqwest({
+      url: streamResolver,
+      type: 'GET',
+      // data: 'json',
+      success: function(soundcloudData) {
+        console.log('success: ', soundcloudData._url.pathname)
+        // res.send(soundcloudData)
+        res.send({pathname: soundcloudData._url.pathname})
+      },
+      error: function(err) {
+        console.log('error', err);
+      }
     })
+
+    // songResolvers.getStreamUri(streamResolver, function(uri){
+    //   console.log('3', uri)
+    //   res.send(uri)
+    // })
   })
 
 })

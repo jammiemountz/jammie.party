@@ -82,7 +82,7 @@ function onError(error) {
  */
 
 function onListening() {
-  console.log('initializing the party.')
+  console.log('initializing the party on port ', app.get('port'))
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
